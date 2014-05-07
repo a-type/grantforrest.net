@@ -1,0 +1,128 @@
+var pauseSunset = false;
+
+function sunsetSketch(processing){
+    var topColor, bottomColor, particles, background;
+    
+    processing.setup = function(){
+        setCanvasSize();
+        $(window).resize(function() { processing.size($("#header").width(), $("#header").height()); } ).trigger("resize");
+        topColor = processing.color(5, 3, 68, 50);
+        bottomColor = processing.color(253, 230, 198, 50);
+        processing.background(0);
+        particles = [];
+        background = generateGradient(topColor, bottomColor, 0, 0, processing.width, processing.height);
+        //prewarm particles
+        for (var p = 0; p < 360; p++) {
+            particles.push(new square(64, 256, 4, 1, 800));   
+        }
+    };
+    processing.draw = function(){
+        if (pauseSunset)
+            return;
+        processing.image(background);
+        var i = 0;
+        while (i < particles.length) {
+            particles[i].draw();
+            if (particles[i].dead) {
+                particles[i].revive();
+            }
+            i++;
+        }
+    };
+    
+    function generateGradient(top, bottom, x, y, w, h) {
+        var tR = processing.red(top), 
+            tG = processing.green(top), 
+            tB = processing.blue(top), 
+            bR = processing.red(bottom),
+            bG = processing.green(bottom), 
+            bB = processing.blue(bottom);
+        
+        var bg = processing.createImage(w, h, processing.RGB);
+        bg.loadPixels();
+        
+        for (var i = 0; i < w * h; i++) {
+            var y = i / bg.width;
+            var n = y / bg.height;
+            bg.pixels.setPixel(i, processing.color(
+                processing.lerp(tR, bR, n * n),
+                processing.lerp(tG, bG, n * n),
+                processing.lerp(tB, bB, n * n),
+                255));
+        }
+        
+        bg.updatePixels();
+        return bg;
+    }
+    
+    function getColor(x, y) {
+        var tR = processing.red(topColor), 
+            tG = processing.green(topColor), 
+            tB = processing.blue(topColor), 
+            bR = processing.red(bottomColor),
+            bG = processing.green(bottomColor), 
+            bB = processing.blue(bottomColor);
+        
+        return processing.color(
+                processing.lerp(tR, bR, y / processing.height),
+                processing.lerp(tG, bG, y / processing.height),
+                processing.lerp(tB, bB, y / processing.height),
+                50);
+    }
+    
+    function setCanvasSize() {
+        var docWidth = $("#cloud-canvas").width();
+        var docHeight = $("#cloud-canvas").height();
+        processing.size(docWidth, docHeight);
+    }
+    
+    function square(minSize, maxSize, maxDrift, minDrift, lifetime) {
+        this.x = Math.random() * processing.width;
+        this.y = Math.random() * processing.height;
+        this.size = (Math.random() * (maxSize - minSize)) + minSize;
+        this.driftX = (Math.random() * (maxDrift - minDrift)) + minDrift;
+        this.driftY = (Math.random() * (maxDrift - minDrift)) + minDrift;
+        if (Math.random() < 0.5)
+            this.driftX *= -1;
+        if (Math.random() < 0.5)
+            this.driftY *= -1;
+        this.initialMaxDrift = maxDrift;
+        this.initialMinDrift = minDrift;
+        this.color = getColor(this.x, this.y);
+        this.dead = false;
+        this.aliveTime = 0;
+        this.lifetime = lifetime + Math.random() * lifetime;
+
+        this.revive = function() {
+            this.dead = false;
+            this.aliveTime = 0;
+            this.x = Math.random() * processing.width;
+            this.y = Math.random() * processing.height;
+            this.driftX = (Math.random() * (this.initialMaxDrift - this.initialMinDrift)) + this.initialMinDrift;
+            this.driftY = (Math.random() * (this.initialMaxDrift - this.initialMinDrift)) + this.initialMinDrift;
+            if (Math.random() < 0.5)
+                this.driftX *= -1;
+            if (Math.random() < 0.5)
+                this.driftY *= -1;
+            this.color = getColor(this.x, this.y);
+        }
+        
+        this.draw = function() {
+            if (this.dead)
+                return;
+            this.x += this.driftX;
+            this.y += this.driftY;
+            this.driftX *= 0.95;
+            this.driftY *= 0.95;
+            
+            this.aliveTime ++;
+            if (this.aliveTime > this.lifetime)
+                this.dead = true;
+            
+            processing.fill(this.color, Math.sin((this.aliveTime / this.lifetime) * Math.PI) * 255);
+            processing.noStroke();
+            processing.rect(this.x - (this.size / 2), this.y - (this.size / 2), this.size, this.size);
+        };
+    }
+}
+

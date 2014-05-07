@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- charset must remain utf-8 to be handled properly by Processing -->
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <script type="text/javascript"> 
+        <!-- 
+        (function() { 
+            if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) { 
+                var msViewportStyle = document.createElement("style"); 
+                msViewportStyle.appendChild( 
+                    document.createTextNode("@-ms-viewport{width:auto!important}") 
+                ); 
+                document.getElementsByTagName("head")[0].appendChild(msViewportStyle); 
+            } 
+        })(); 
+        //--> 
+        </script>
+        
+        <link rel="stylesheet" href="lib/bootstrap-3.0.0-wip/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/style-static.css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/bootstrap-3.0.0-wip/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="lib/backbone/underscore.js"></script>
+        <script type="text/javascript" src="lib/backbone/backbone.js"></script>
+        <script type="text/javascript"> GRANT = {}; </script>
+        <script type="text/javascript" src="mv/mainView.js"></script>
+        <script type="text/javascript" src="mv/mainModel.js"></script>
+        <script type="text/javascript" src="lib/processing/processing-1.4.1.min.js"></script>
+        <script type="text/javascript" src="processing/lines.pjs"></script>
+        <script type="text/javascript" src="processing/sky.pjs"></script>
+        <script type="text/javascript" src="processing/sunset.pjs"></script>
+        <script type="text/javascript" src="processing/birds.pjs"></script>
+        <script type="text/javascript" src="lib/jquery.scrollTo-1.4.3.1-min.js"></script>
+    </head>
+    <body>
+        <div id="header" class="fixed-header fullscreen affix" style="opacity: 0">
+            <div id="rotator" class="background-rotator">
+                <canvas id="cloud-canvas" class="fit-image processing-canvas" style="background: white" ></canvas>
+                <canvas id="processing-canvas" class="fit-image processing-canvas" style="background: white">
+                </canvas>
+                <canvas id="sunset-canvas" class="fit-image processing-canvas" style="background: white">
+                </canvas>
+            </div>
+            <div id="foreground" class="fixed-content">
+                <h1 class="fg-text">Grant Forrest</h1>
+                <h4 class="fg-text fg-subline">I create things</h4>
+                <div class="btn-group fg-subline">
+                    <a href="#" class="btn btn-clear fg-text">home</a>
+                    <a href="#dev" class="btn btn-clear fg-text">dev</a>
+                    <a href="#music" class="btn btn-clear fg-text">music</a>
+                </div>
+            </div>
+        </div>
+        <span id="blackbar" class="fixed-header content-inverted blackbar" style="height: 32px; width: 100%; text-align: center; z-index: 6;">
+            <a id="arrowLink" onMouseDown="scrollDown()" onFocus="dropFocus()" ><img src="images/arrow.png" id="arrow" style="line-height: 32px; opacity: 0; height: 100%"/></a>
+        </span>
+        <div id="section" style="opacity: 0">
+            <div id="sectionBuffer" class="content-inverted"></div>
+            <div id="sectionHeaderOuter" class="page-header content-inverted">
+                <div id="sectionHeader" class="container"></div>
+            </div>
+            <div id="pageDiv" class="page-content content-main" >
+                <div id="pageContainer">
+                    <div id="frontPage" class="container">
+                        <div class="col-lg-12">
+                            <h3>Who I am</h3>
+                            <text>My name is Grant Forrest. I've gone by <i>a-type</i> here on the internet. I'm a programmer, writer, musician, amateur designer, novice theologian and general lover of beautiful things.</text>
+                            <h3>Contact me</h3>
+                            <text>You can get me at <a href="mailto:grant.forrest@outlook.com">grant.forrest@outlook.com</a>. If this is about a bug or feature in something I've coded, it'd be kind of you to use <a href='mailto:a-type-dev@outlook.com'>a-type-dev@outlook.com</a> to keep things sorted.</text>
+                        </div>
+                    </div>
+                    <div id="devPage" class="container">
+                        <a class="jumbo-link" data-toggle="collapse" data-parent="#devPage" href="#magnolia-info">
+                            <div class="row jumbotron article-jumbo">
+                                <div class="col-lg-12">
+                                    <h2>Magnolia</h2>
+                                    <h3>Browser-based 3D presentation creation and simulation</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="panel-collapse collapse" id="magnolia-info">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h3>Summary</h3>
+                                    <text>Magnolia is an early-development experimental system for creating presentations which can be displayed in the 'high-tech spaces' of North Carolina State University's Hunt Library. I was in charge of creating and maintaining the three-dimensional project editor. Unfortunately, this innovative feature is not available to the general public at the moment, but you can visit the public site <a href="http://www.magnolia.lib.ncsu.edu">here</a>.</text>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img class="article-img" src="images/magnolia/Screen1.png"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img class="article-img" src="images/magnolia/Screen2.png"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h3>My role</h3>
+                                    <text>I worked with a group of student and full-time employees to collaboratively create Magonlia from the ground up. My specialty on that team was three-dimensional simulation. I was responsible for all of the code which runs the 3D simulation of the room in the browser and enables rich user interaction. To complete this task, I used the <a href="http://www.threejs.org">ThreeJS WebGL library</a> and <a href="http://www.BackboneJS.org">Backbone</a>.</text>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h3>What it does</h3>
+                                    <text>The simulation is incredibly well-featured. Users upload media items to our servers, and then create a new presentation project. They select one of the many high-tech rooms at Hunt Library and begin placing their media on the simulated screens. Media items are dragged and dropped on the 3D scene from the page. They can then be dragged around, resized, re-ordered, copied, pasted, or moved to other screens.</text>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img class="article-img" src="images/magnolia/Screen3.png"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h3>The cool stuff</h3>
+                                    <text>Simulating an interactive room in a browser window is no easy task, but the code is constructed to tackle it with elegance. The screens in Magnolia are all textures; realtime renderings of an independent scene where media sits above a dark-gray plane. When the user interacts with a media item with his or her mouse, the mouse is raycasted to the wall, and that 3D coordinate is transformed and manipulated into the local space of the rendered scene and re-cast to collide with the media therein. Any manipulations are posted to a Backbone model of the media, which automatically updates the visible scene with change events. All interaction goes through Backbone before being rendered, so that the user's project file is constantly up-to-date.</text>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a class="jumbo-link" data-toggle="collapse" data-parent="#devPage" href="#apps-info">
+                            <div class="row jumbotron article-jumbo">
+                                <div class="col-lg-12">
+                                    <h2>Apps and Games</h2>
+                                    <h3>Windows Phone may be small, but it's my platform of choice.</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="panel-collapse collapse" id="apps-info">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img class="article-img-half" src="images/part-dieu/1.png"/>
+                                    <img class="article-img-half" src="images/part-dieu/2.png"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h3>Part-Dieu</h3>
+                                    <text>Part-Dieu is a fast-paced maze which requires quick thinking and a bit of luck. The name is an homage to the urban metro hub in Lyon, France. Metro maps were part of my inspiration for the visual style.</text><br/>
+                                    <a href='http://windowsphone.com/s?appId=7dceeb76-75d6-48d4-a772-b8a97e7314a7'><img src="images/badges/wp_store.png"></img></a>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h3>Sleepy</h3>
+                                    <text>Sleepy is a smart alarm app for Windows Phone which wakes you up between sleep cycles. Sleepy is a design-focused experiment in stylized UI.</text><br/>
+                                    <a href='http://windowsphone.com/s?appId=b9eb8c80-1e6f-4dca-81bb-99a8465efaf2'><img src="images/badges/wp_store.png"></img></a>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img class="article-img-half" src="images/sleepy/main.png"/>
+                                    <img class="article-img-half" src="images/sleepy/menu.png"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img class="article-img-half" src="images/tilegap/app.png"/>
+                                    <img class="article-img-half" src="images/tilegap/startscreen.png"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h3>TileGap</h3>
+                                    <text>How do you differentiate an app which only does one simple task? I incorporated context and story into a one-button-wonder which generates blank tiles for the Windows Phone start screen.</text>
+                                    <a href='http://www.windowsphone.com/s?appId=0c4ccb3f-f405-47bd-8d9e-1e59667b5a47'><img src="images/badges/wp_store.png"></img></a>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="jumbo-link" data-toggle="collapse" data-parent="#devPage" href="#virtualbrowse-info">
+                            <div class="row jumbotron article-jumbo">
+                                <div class="col-lg-12">
+                                    <h2>VirtualBrowse</h2>
+                                    <h3>A touch-centric catalog browsing kiosk in WPF</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="panel-collapse collapse" id="virtualbrowse-info">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h3>Overview</h3>
+                                    <text>VirtualBrowse is a public-facing touch interface for exploring the catalog at North Carolina State University's Hunt Library. I was the sole developer on this project until January, 2013. VirtualBrowse is a WPF application written in C# and XAML.</text>
+                                    <h3>My role</h3>
+                                    <text>VirtualBrowse was my first project at NCSU Libraries, and I was assigned as the only developer as a Sophomore. Although I had some experience in WPF, I had never completed a project this big before. Over the course of a year I created the application, carefully employing the MVVM design pattern and documenting every portion in case another developer was added to the team. That never happened, though, and when Hunt Library opened I deployed the application to the public as the sole author. It is still in use now.</text>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img class="article-img article-profile-img" src="images/vb/photo1.jpg"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="musicPage" class="container">
+                        <div class="col-lg-6">
+                            <h3>Soundcloud</h3>
+                            <text>You'll find all of my best work at my SoundCloud page. <a href='https://soundcloud.com/a-type-1'>Tune in.</a></text>
+                        </div>
+                        <div class="col-lg-6">
+                            <h3>Stream it here</h3>
+                            <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/29678696&amp;color=6190FF&amp;auto_play=false&amp;show_artwork=true"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="blocker" class="complete-overlay" >
+            <div class="fixed-content" style="margin-bottom: 32px; ">
+                <h2 >Loading up...</h2>
+                You'll need scripts enabled to view this site.
+            </div>
+        </div>
+        <div id="modal-img-overlay" class="content-inverted complete-overlay" style="display: none;">
+            <img class="modal-img" id="modal-img"/>
+        </div>
+
+        <script type="text/template" id="sectionHeaderTemplate">
+            <h2 class="content-inverted col-12"> <%= header.subtitle %> </h2>
+            <text> <%= header.description %> </text>
+        </script>
+        <script type="text/template" id="pageTemplate">
+            <% _.each(section, function(content) { %>
+                <div class="col-12">
+                    <h3> <%= content.title %> </h3>
+                    <text> <%= content.info %> </text>
+                </div>
+            <% }); %>
+        </script>
+        <script>
+        //https://github.com/weepy/jquery.path
+        var headerHeight = 320;
+        var userScrolled = false;
+        var lastScrollTop = 0;
+        var scrollingUp = false;
+
+        $(window).load(function() {
+
+            var theWindow = $(window);
+            var header = $("#header");
+            headerHeight = theWindow.innerHeight() * 0.95;
+
+            function resizeBg() {
+                var mq = window.matchMedia("(min-width: 40em)");
+                if (mq.matches) {
+                    $('.fullscreen').each(function (index, element) {
+                        $(this).height(theWindow.innerHeight());
+                    });
+                    $("#sectionBuffer").height(0);
+                } else {
+                    $(".fit-image").each(function (index, element){
+                        var aspectRatio = $(this).width() / $(this).height();
+                        if ( (theWindow.width() / theWindow.height()) < aspectRatio ) {
+                            $(this).height(theWindow.height());
+                            $(this).width(aspectRatio * theWindow.height());
+                        } else {
+                            $(this).height(aspectRatio / theWindow.width());
+                            $(this).width(theWindow.width());
+                        }
+                        $(this).css("margin-left", 0);
+                    });
+                    $('.fullscreen').each(function (index, element) {
+                        $(this).height(theWindow.innerHeight() * 0.95);
+                    });
+                    headerHeight = header.outerHeight();
+                    $("#sectionBuffer").height(headerHeight);
+                }
+            }
+
+            theWindow.resize(resizeBg).trigger("resize");
+
+
+            //headerHeight = header.outerHeight();
+            var mq = window.matchMedia("(min-width: 40em)");
+            if (!mq.matches) {
+                $("#sectionBuffer").height(headerHeight);
+                $("#blackbar").css("top", headerHeight);
+            }
+
+            function floatHeader() {
+                var mq = window.matchMedia("(min-width: 40em)");
+                if (mq.matches) {
+                    
+                } else {
+                    var scrollTop = theWindow.scrollTop();
+                    if (scrollTop > lastScrollTop)
+                        scrollingUp = false;
+                    else if (scrollTop < lastScrollTop)
+                        scrollingUp = true;
+                    if (scrollTop > 0) {
+                        userScrolled = true;
+                        //$(".fixed-header").addClass("affix");
+                        var min = $(window).height() > 320 ? 160 : 40;
+                        min = scrollTop > 1200 && !scrollingUp ? 0 : min;
+                        var headerCollapsedHeight = Math.max(headerHeight - scrollTop, min);
+                        header.height(headerCollapsedHeight); //ANIMATE HEIGHT
+                        //header.animate({height: headerCollapsedHeight}, 500);
+                        $("#blackbar").css("top", headerCollapsedHeight);
+                        //header.stop().animate({ height: headerCollapsedHeight }, 10);
+                        //$("#sectionBuffer").animate({ height: headerHeight }, 100);
+                        $(".fit-image").each(function (index, element){
+                            var aspectRatio = $(this).width() / $(this).height();
+                            if ( (theWindow.width() / theWindow.height()) < aspectRatio ) {
+                                $(this).height(theWindow.height());
+                                $(this).width(aspectRatio * theWindow.height());
+                            } else {
+                                $(this).height(aspectRatio / theWindow.width());
+                                $(this).width(theWindow.width());
+                            }
+                            $(this).css("margin-left", 0);
+                        });
+                    } else {
+                        //$(".fixed-header").removeClass("affix");
+                        header.height(headerHeight);
+                        $("#blackbar").css("top", headerHeight);
+                    }
+                    lastScrollTop = scrollTop;
+                }
+            }
+
+            //theWindow.scroll(floatHeader).trigger("scroll");
+            setInterval(floatHeader, 20);
+
+            var canvas = document.getElementById("processing-canvas");
+            var p = new Processing(canvas, sketchProc);
+            
+            var cloudCanvas = document.getElementById("cloud-canvas");
+            var p2 = new Processing(cloudCanvas, cloudSketch);
+            
+            var sunsetCanvas = document.getElementById("sunset-canvas");
+            var p3 = new Processing(sunsetCanvas, sunsetSketch);
+
+            GRANT.mainModel = new MainModel();
+            GRANT.mainView = new MainView({ model: GRANT.mainModel });
+            GRANT.router = new GRANT.Router();
+            Backbone.history.start();
+            
+            $("#blocker").hide(300);
+            $("#header").animate({opacity: 1}, 1000);
+            $("#section").animate({opacity: 1}, 1000);
+            GRANT.mainView.goTo(GRANT.mainModel, GRANT.mainModel.get("currentPage"));
+
+            function pulseArrow() {}
+
+            pulseArrow = function() {
+                if (userScrolled) {
+                    $("#arrow").stop().animate({opacity: 0}, 1000);
+                    return;
+                }
+                else if ($("#arrow").css("opacity") < 1) {
+                    $("#arrow").stop().animate({opacity: 1}, 2000, pulseArrow);
+                } else {
+                    $("#arrow").stop().animate({opacity: 0}, 2000, pulseArrow);
+                }
+                //$.scrollTo(0, 2000, {easing: 'elasout', axis: 'y'});
+            }
+
+            pulseArrow();
+
+            //subcribe images to show modal box
+            $(".article-img").each(function(i, el) {
+                $(el).click(showModalImg);
+            });
+            $(".article-img-half").each(function(i, el) {
+                $(el).click(showModalImg);
+            });
+            $("#modal-img-overlay").click(
+                function() {
+                    $(this).hide(400);
+                }
+            );
+        }); // doc load
+
+        function scrollDown() {
+            if ($(window).scrollTop() < 100) {
+                $.scrollTo(headerHeight - 160, 1000, {axis: 'y'});
+            }
+        }
+
+        function dropFocus() {
+            $("#arrowLink").blur();
+        }
+
+        function showModalImg(eventObject) {
+            var imgPath = eventObject.currentTarget.src;
+            var img = $("#modal-img");
+            var w, h;
+            if (eventObject.currentTarget.naturalHeight < eventObject.currentTarget.naturalWidth) {
+                w = Math.min($("#modal-img-overlay").width(), eventObject.currentTarget.naturalWidth);
+                h = w * (eventObject.currentTarget.naturalHeight / eventObject.currentTarget.naturalWidth);
+            } else {
+                h = Math.min($("#modal-img-overlay").height(), eventObject.currentTarget.naturalHeight);
+                w = h * (eventObject.currentTarget.naturalWidth / eventObject.currentTarget.naturalHeight);
+            }
+            img.attr("src", imgPath);
+            img.css("width", w);
+            img.css("height", h);
+            img.css("margin-top", h / -2);
+            img.css("margin-left", w / -2);
+            $("#modal-img-overlay").show(400);
+        }
+        </script>
+    </body>
+</html>

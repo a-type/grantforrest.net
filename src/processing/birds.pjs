@@ -1,0 +1,62 @@
+var pauseBirds = false;
+
+function birdsSketch(processing) {
+    var lines = [];
+    
+	processing.setup = function() {
+		processing.externals.sketch.pauseOnBlur = true;
+		processing.frameRate(45);
+		processing.size($("#header").width(), $("#header").height());
+		$(window).resize(function() { processing.size($("#header").width(), $("#header").height()); } ).trigger("resize");
+		processing.smooth();
+        var width = $("#header").width();
+        var height = $("#header").height();
+        
+        lines.push(new line(processing.color(255, 85, 51), 32, { x: 0, y: height / 2 }, { x: width * (2 / 3), y: 0 }, 0, 4));
+	};
+
+	processing.draw = function() {
+        if (pauseBirds)
+            return;
+        processing.noStroke();
+  		processing.fill(255,255,255,5);
+  		processing.rect(0,0,processing.width,processing.height);
+        for (var i = 0; i < lines.length; i++) {
+            lines[i].draw();       
+        }
+	};	
+
+
+    function line(color, width, start, end, capAngle, speed) {
+        this.color = color;
+        this.width = width;
+        this.start = start;
+        this.end = end;
+        this.speed = speed;
+        this.length = Math.sqrt(Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2));
+        this.dir = { x: (end.x - start.x) / this.length, y: (end.y - start.y) / this.length };
+        this.pos = { x: start.x, y: start.y };
+        this.capAngle = capAngle;
+        var displacementLength = Math.sin(capAngle) * width;
+        var displacementWidth = Math.cos(capAngle) * width;
+        var ortho = { x: this.dir.y, y: -this.dir.x };
+        this.leftDisplacement = { x: (-this.dir.x * displacementLength) - (ortho.x * displacementWidth), y: (-this.dir.y * displacementLength) - (ortho.y * displacementWidth) };
+        this.rightDisplacement = { x: (this.dir.x * displacementLength) + (ortho.x * displacementWidth), y: (this.dir.y * displacementLength) + (ortho.y * displacementWidth) };
+
+        this.draw = function() {
+            this.pos.x += this.dir.x * this.speed;
+            this.pos.y += this.dir.y * this.speed;
+            if (Math.sqrt(Math.pow(this.end.x - this.pos.x, 2) + Math.pow(this.end.y - this.pos.y, 2)) < this.speed) {
+                this.speed = 0;
+            }
+            processing.fill(color);
+            processing.noStroke();
+            processing.beginShape();
+            processing.vertex(this.start.x + this.leftDisplacement.x, this.start.y + this.leftDisplacement.y);
+            processing.vertex(this.start.x + this.rightDisplacement.x, this.start.y + this.rightDisplacement.y);
+            processing.vertex(this.pos.x + this.rightDisplacement.x, this.pos.y + this.rightDisplacement.y);
+            processing.vertex(this.pos.x + this.leftDisplacement.x, this.pos.y + this.leftDisplacement.y);
+            processing.endShape();
+        };
+    }
+}
