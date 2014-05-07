@@ -27,7 +27,7 @@ function showPortfolioContent(eventObject) {
         var top = 0;
         var mq = window.matchMedia("(min-width: 40em)");
         if (mq.matches) {
-            top = $("#devPage").scrollTop();
+            top = Math.max(0, $(window).scrollTop() - offset);
             $("#portfolio-modal-whiteout").css("top", offset);
         } else {
             top = Math.max(offset, $(window).scrollTop() + $("#blackbar").outerHeight() + parseInt($("#blackbar").css("top").split("px")[0]));
