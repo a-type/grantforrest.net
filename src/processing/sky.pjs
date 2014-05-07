@@ -9,7 +9,6 @@ function cloudSketch(processing){
             processing.size($("#header").width(), $("#header").height()); 
             background = generateGradient(processing.color(13, 12, 80), processing.color(125, 125, 255), 0, 0, processing.width, processing.height); 
         } ).trigger("resize");
-        background = generateGradient(processing.color(13, 12, 80), processing.color(125, 125, 255), 0, 0, processing.width, processing.height);
         plane = new airplane(1, 300);
         processing.background(255);
         cloudRows = [];

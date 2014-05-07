@@ -76,11 +76,7 @@ function sketchProc(processing) {
 	processing.myTakenX = [];
 
 	processing.setup = function() {
-		processing.externals.sketch.pauseOnBlur = true;
-		processing.frameRate(45);
-		processing.size($("#header").width(), $("#header").height());
 		$(window).resize(function() { processing.size($("#header").width(), $("#header").height()); } ).trigger("resize");
-		processing.smooth();
 	};
 
 	processing.draw = function() {
