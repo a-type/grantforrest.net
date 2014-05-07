@@ -43,7 +43,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .affix {
   position: fixed;
-  z-index: 3;
+  z-index: 12;
 }
 
 .processing-canvas {
@@ -72,47 +72,6 @@ h1,h2,h3,h4,h5,h6 {
     cursor: pointer;
 }
 
-.complete-overlay {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    z-index: 10;
-}
-
-#modal-img-overlay {
-    background: rgba(0, 0, 0, 0.75);
-}
-
-.modal-img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  vertical-align: middle;;
-}
-
-.page-modal {
-    clear: both;
-    position: absolute;
-    background: white;
-    height: 100%;
-    top: 0;
-    z-index: 10;
-}
-
-.page-modal-content {
-    margin-top: 64px;
-    margin-bottom: 64px;
-}
-
-.close-button {
-    z-index: 20;
-    width: 100%;
-    color: #f4f4f4;
-}
-
 .close-button:hover {
     text-decoration: none;
     color: black;
@@ -121,8 +80,8 @@ h1,h2,h3,h4,h5,h6 {
 .page-content {
     clear: both;
     position: relative;
-    padding-left:10%;
-    padding-right:10%;
+    /*padding-left:10%;
+    padding-right:10%;*/
     /*padding-bottom:10%;*/
     height: 100%;
 }
@@ -165,7 +124,7 @@ h1,h2,h3,h4,h5,h6 {
         width: 100%;
         height: 95%;
         overflow: hidden;
-        z-index: 3;
+        z-index: 8;
     }
 
     .fixed-content{
@@ -177,7 +136,10 @@ h1,h2,h3,h4,h5,h6 {
     
     .blackbar {
         position: fixed;
-        z-index: 6;
+        z-index: 12;
+        height: 32px; 
+        width: 100%; 
+        text-align: center;
     }
     
     .page-content{
@@ -217,7 +179,7 @@ h1,h2,h3,h4,h5,h6 {
       width: 15%;
       height: 100%;
       overflow: hidden;
-      z-index: 3;
+      z-index: 8;
     }
 
     .fixed-content{

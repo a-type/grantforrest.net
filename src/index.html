@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="lib/bootstrap-3.0.0-wip/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="css/style-static.css"/>
         <link rel="stylesheet" href="css/portfolio-images.css"/>
+        <link rel="stylesheet" href="css/modals.css"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="lib/bootstrap-3.0.0-wip/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="lib/backbone/underscore.js"></script>
@@ -55,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <span id="blackbar" class="fixed-header content-inverted blackbar" style="height: 32px; width: 100%; text-align: center; z-index: 6;">
+        <span id="blackbar" class="fixed-header content-inverted blackbar">
             <a id="arrowLink" onMouseDown="scrollDown()" onFocus="dropFocus()" ><img src="images/arrow.png" id="arrow" style="line-height: 32px; opacity: 0; height: 100%"/></a>
         </span>
         <div id="section" class="page-section" style="opacity: 0">
@@ -250,17 +251,7 @@
                             <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/29678696&amp;color=6190FF&amp;auto_play=false&amp;show_artwork=true"></iframe>
                         </div>
                     </div>
-                    <div id="portfolio-modal" class="page-modal container" style="display: none;">
-                        <a id="portfolio-modal-dismiss" href="#dev" class="content-main close-button"><h1><b>&times;</b></h1></a>
-                        <div class="page-modal-content">
-                            <h3 id="portfolio-modal-header">Modal</h3>
-                            <div id="portfolio-modal-content">
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                
             </div>
             
         </div>
@@ -272,6 +263,19 @@
         </div>
         <div id="modal-img-overlay" class="complete-overlay" style="display: none;">
             <img class="modal-img" id="modal-img"/>
+        </div>
+        <div id="portfolio-modal-whiteout" class="whiteout" style="display: none;">
+            <div id="portfolio-modal" class="page-modal">
+                <div class="container">
+                    <a id="portfolio-modal-dismiss" href="#dev" class="content-main close-button"><h1><b>&times;</b></h1></a>
+                    <div class="page-modal-content">
+                        <h3 id="portfolio-modal-header">Modal</h3>
+                        <div id="portfolio-modal-content">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <script type="text/template" id="sectionHeaderTemplate">
             <h2 class="content-inverted col-12"> <%= header.subtitle %> </h2>

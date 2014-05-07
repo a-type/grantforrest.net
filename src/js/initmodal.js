@@ -18,11 +18,21 @@ function showModalImg(eventObject) {
 }
 
 function showPortfolioContent(eventObject) {
-    var pageContent = $(eventObject.currentTarget).siblings(".portfolio-content")[0];
+    var pageContent = $(eventObject.currentTarget).siblings(".portfolio-content")[0],
+        offset = $("#sectionHeaderOuter").outerHeight() + $("#sectionHeaderOuter").offset().top;;
     if ($(pageContent).is("a")) {
         var target = $(pageContent).attr("href");
         window.open(target, "_blank");
     } else {
+        var top = 0;
+        var mq = window.matchMedia("(min-width: 40em)");
+        if (mq.matches) {
+            top = $("#devPage").scrollTop();
+            $("#portfolio-modal-whiteout").css("top", offset);
+        } else {
+            top = Math.max(offset, $(window).scrollTop() + $("#blackbar").outerHeight() + parseInt($("#blackbar").css("top").split("px")[0]));
+        }
+        
         var content = $(pageContent).clone();
         content.removeClass("hidden");
         var modalContent = $("#portfolio-modal-content");
@@ -32,8 +42,13 @@ function showPortfolioContent(eventObject) {
         modalContent.find(".article-img-half").click(showModalImg);
         var modalHeader = $("#portfolio-modal-header");
         modalHeader.text($(eventObject).find("h2").text());
-        $("#portfolio-modal").css("opacity", 0.0).show().animate({opacity: 1.0}, 400);
+        $("#portfolio-modal-whiteout").css({opacity: 0.0, height: $("body").height()}).show().animate({opacity: 1.0}, 400);
+        $("#portfolio-modal").css("top", top);
     }
+}
+
+function hidePortfolioContent(eventObject) {
+    $("#portfolio-modal-whiteout").animate({opacity: 0.0}, 200, "swing", function() {$(this).hide()});
 }
 
 $(window).load(function() {
@@ -43,5 +58,30 @@ $(window).load(function() {
         }
     );
     $(".jumbo-link").click(showPortfolioContent);
-    $("#portfolio-modal-dismiss").click(function() { $("#portfolio-modal").animate({opacity: 0.0}, 200, "swing", function() {$(this).hide()}); });
+    $("#portfolio-modal-dismiss").click(hidePortfolioContent);
 });
+
+/*
+$(window).bind("scroll", function() {
+    var top = 0,
+        modal = $("#portfolio-modal");
+    var mq = window.matchMedia("(min-width: 40em)");
+    if (mq.matches) {
+        top = $("#devPage").scrollTop();
+        modal.css("top", top);
+    } else {
+        var modalSize = modal.outerHeight(),
+            offset = $("#sectionHeaderOuter").outerHeight() + $("#sectionHeaderOuter").offset().top;
+        top = Math.max(offset, $(window).scrollTop() + $("#blackbar").outerHeight() + parseInt($("#blackbar").css("top").split("px")[0]));
+        var max = $(window).scrollTop() + $(window).height() - modalSize,
+            min = top,
+            current = parseInt(modal.css("top").split("px")[0]);
+        if (current > min && current < max) {
+            //do nothing?
+        } else if (current < min) {
+            modal.css('top', min);
+        } else {
+            modal.css('top', max);
+        }
+    }
+});*/

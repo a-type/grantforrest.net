@@ -16,6 +16,7 @@ $(window).load(function() {
                 $(this).height(theWindow.innerHeight());
             });
             $("#sectionBuffer").height(0);
+            headerHeight = 0;
         } else {
             $(".fit-image").each(function (index, element){
                 var aspectRatio = $(this).width() / $(this).height();
@@ -38,17 +39,15 @@ $(window).load(function() {
 
     theWindow.resize(resizeBg).trigger("resize");
     
-    var mq = window.matchMedia("(min-width: 40em)");
+    var mq = window.matchMedia("(max-width: 40em)");
     if (!mq.matches) {
         $("#sectionBuffer").height(headerHeight);
         $("#blackbar").css("top", headerHeight);
     }
     
     function floatHeader() {
-        var mq = window.matchMedia("(min-width: 40em)");
+        var mq = window.matchMedia("(max-width: 40em)");
         if (mq.matches) {
-
-        } else {
             var scrollTop = theWindow.scrollTop();
             if (scrollTop > lastScrollTop)
                 scrollingUp = false;
