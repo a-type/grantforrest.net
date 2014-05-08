@@ -41,7 +41,8 @@ function showPortfolioContent(eventObject) {
         modalContent.find(".article-img").click(showModalImg);
         modalContent.find(".article-img-half").click(showModalImg);
         var modalHeader = $("#portfolio-modal-header");
-        modalHeader.text($(eventObject).find("h2").text());
+        var contentHeader = $(eventObject.currentTarget).find(".article-jumbo").find("h2").text();
+        modalHeader.text(contentHeader);
         $("#portfolio-modal-whiteout").css({opacity: 0.0, height: $("body").height()}).show().animate({opacity: 1.0}, 400);
         $("#portfolio-modal").css("top", top);
     }

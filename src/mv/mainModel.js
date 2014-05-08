@@ -15,7 +15,7 @@ var MainModel = Backbone.Model.extend({
                 },
                 {   header: 
                         { subtitle: "I develop for Windows devices and Web", 
-                        description: "I love C#, Java, and JavaScript. Here's some stuff I've done:" },
+                        description: "I love C#, JavaScript, and Java. Here's some stuff I've done:" },
                     pageName: "devPage"
                 },
                 {   header: 
