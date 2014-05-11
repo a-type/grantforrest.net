@@ -23,6 +23,10 @@ h1,h2,h3,h4,h5,h6 {
     font-family: "Segoe UI Light", "Helvetica", "Arial", "Sans-Serif";
 }
 
+#nav-buttons {
+    width: 100%;
+}
+
 .fg-subline {
     margin-left: 2%;
 }
@@ -133,6 +137,8 @@ h1,h2,h3,h4,h5,h6 {
         float: left;
         position: absolute;
         bottom: 32px;
+        width: 80%;
+        margin-right: 10%;
     }
     
     .blackbar {
@@ -145,6 +151,7 @@ h1,h2,h3,h4,h5,h6 {
     
     .page-content{
         margin: 0;
+        margin-bottom : 32px;
     }
 
     .page-header {
@@ -188,7 +195,8 @@ h1,h2,h3,h4,h5,h6 {
         float: left;
         position: absolute;
         top: 32px;
-        width: 100%;
+        width: 80%;
+        margin-right: 10%;
     }
     
     .blackbar {

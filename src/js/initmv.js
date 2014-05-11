@@ -1,4 +1,5 @@
 $(window).load(function() {
+    defineMainView();
     GRANT.mainModel = new MainModel();
     GRANT.mainView = new MainView({ model: GRANT.mainModel });
     GRANT.router = new GRANT.Router();
