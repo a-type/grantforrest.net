@@ -312,10 +312,20 @@
                 </div>
             <% }); %>
         </script>
-        <script src="js/header.js"></script>
-        <script src="js/arrow.js"></script>
-        <script src="js/initmv.js"></script>
-        <script src="js/initprocessing.js"></script>
-        <script src="js/initmodal.js"></script>
+        <script src="js/initHeader.js"></script>
+        <script src="js/initArrow.js"></script>
+        <script src="js/initMV.js"></script>
+        <script src="js/initProcessing.js"></script>
+        <script src="js/initModal.js"></script>
+        <script type="text/javascript">
+            //consolidate all initialization functions
+            $(document).ready(function() {
+                initHeader();
+                initArrow();
+                initMV();
+                initProcessing();
+                initModal();
+            });
+        </script>
     </body>
 </html>

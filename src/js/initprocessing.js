@@ -1,4 +1,4 @@
-$(window).load(function() {
+function initProcessing() {
     var canvas = document.getElementById("processing-canvas");
     var p = new Processing(canvas, sketchProc);
 
@@ -9,4 +9,4 @@ $(window).load(function() {
     var p3 = new Processing(sunsetCanvas, sunsetSketch);
     
     $("span:contains('AAAAAAAA')").remove();
-});
+}

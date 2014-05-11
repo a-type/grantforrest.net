@@ -1,4 +1,4 @@
-$(window).load(function() {
+function initMV() {
     defineMainView();
     GRANT.mainModel = new MainModel();
     GRANT.mainView = new MainView({ model: GRANT.mainModel });
@@ -9,4 +9,4 @@ $(window).load(function() {
     $("#header").animate({opacity: 1}, 1000);
     $("#section").animate({opacity: 1}, 1000);
     GRANT.mainView.goTo(GRANT.mainModel, GRANT.mainModel.get("currentPage"));
-});
+}

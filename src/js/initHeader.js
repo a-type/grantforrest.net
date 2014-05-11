@@ -3,7 +3,7 @@ var headerHeight = 320,
     lastScrollTop = 0,
     scrollingUp = false;
 
-$(window).load(function() {
+function initHeader() {
     
     var theWindow = $(window);
     var header = $("#header");
@@ -12,26 +12,11 @@ $(window).load(function() {
     function resizeBg() {
         var mq = window.matchMedia("(min-width: 40em)");
         if (mq.matches) {
-            $('.fullscreen').each(function (index, element) {
-                $(this).height(theWindow.innerHeight());
-            });
+            $('.fullscreen').height(theWindow.innerHeight());
             $("#sectionBuffer").height(0);
             headerHeight = 0;
         } else {
-            $(".fit-image").each(function (index, element){
-                var aspectRatio = $(this).width() / $(this).height();
-                if ( (theWindow.width() / theWindow.height()) < aspectRatio ) {
-                    $(this).height(theWindow.height());
-                    $(this).width(aspectRatio * theWindow.height());
-                } else {
-                    $(this).height(aspectRatio / theWindow.width());
-                    $(this).width(theWindow.width());
-                }
-                $(this).css("margin-left", 0);
-            });
-            $('.fullscreen').each(function (index, element) {
-                $(this).height(theWindow.innerHeight() * 0.95);
-            });
+            $('.fullscreen').height(theWindow.innerHeight() * 0.95);
             headerHeight = header.outerHeight();
             $("#sectionBuffer").height(headerHeight);
         }
@@ -84,4 +69,4 @@ $(window).load(function() {
         }
     } 
     setInterval(floatHeader, 20);
-});
+}

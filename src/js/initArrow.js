@@ -8,7 +8,7 @@ function dropFocus() {
     $("#arrowLink").blur();
 }
 
-$(window).load(function() {
+function initArrow() {
     function pulseArrow() {}
     pulseArrow = function() {
         if (userScrolled) {
@@ -23,4 +23,4 @@ $(window).load(function() {
         //$.scrollTo(0, 2000, {easing: 'elasout', axis: 'y'});
     }
     pulseArrow();  
-});
+}
