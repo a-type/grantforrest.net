@@ -30,6 +30,8 @@
         <script type="text/javascript"> GRANT = {}; </script>
         <script type="text/javascript" src="mv/mainView.js"></script>
         <script type="text/javascript" src="mv/mainModel.js"></script>
+        <script type="text/javascript" src="mv/blogModel.js"></script>
+        <script type="text/javascript" src="mv/blogView.js"></script>
         <script type="text/javascript" src="lib/processing/processing.min.js"></script>
         <script type="text/javascript" src="processing/lines.pjs"></script>
         <script type="text/javascript" src="processing/sky.pjs"></script>
@@ -45,6 +47,7 @@
                 </canvas>
                 <canvas id="sunset-canvas" class="fit-image processing-canvas" style="background: white">
                 </canvas>
+                <div id="thoughts-canvas" class="fit-image processing-canvas" style="background: #aaaaaa"></div>
             </div>
             <div id="foreground" class="fixed-content">
                 <h1 class="fg-text">Grant Forrest</h1>
@@ -53,6 +56,7 @@
                     <li><a href="#" class="btn btn-clear fg-text">home</a></li>
                     <li><a href="#dev" class="btn btn-clear fg-text">dev</a></li>
                     <li><a href="#music" class="btn btn-clear fg-text">music</a></li>
+                    <li><a href="#thoughts" class="btn btn-clear fg-text">thoughts</a></li>
                 </ul>
             </div>
         </div>
@@ -274,6 +278,8 @@
                             <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/29678696&amp;color=6190FF&amp;auto_play=false&amp;show_artwork=true"></iframe>
                         </div>
                     </div>
+                    <div id="blogPage">
+                    </div>
                 </div>
             </div>
             
@@ -311,6 +317,17 @@
                     <text> <%= content.info %> </text>
                 </div>
             <% }); %>
+        </script>
+        <script type="text/template" id="blogPostTemplate">
+            <div class="row blog-post">
+                <div class="blog-post-title jumbotron">
+                    <h1><%= title %></h1>
+                    <h3><%= date %></h3>
+                </div>
+                <div class="blog-post-body">
+                    <%= body %>
+                </div>
+            </div>
         </script>
         <script src="js/initHeader.js"></script>
         <script src="js/initArrow.js"></script>

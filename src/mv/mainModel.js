@@ -1,6 +1,6 @@
 var MainModel = Backbone.Model.extend({
     defaults: {
-        "numPages" : 3,
+        "numPages" : 4,
         "currentPage" : 0,
         "pageContent" : [],
     },
@@ -22,6 +22,11 @@ var MainModel = Backbone.Model.extend({
                         { subtitle: "Acoustic or electronic", 
                         description: "I just like making nice sounds." },
                     pageName: "musicPage"
+                },
+                {   header:
+                        { subtitle: "We Cannot Remain Human",
+                        description: "Thoughts on life, God, culture, and beauty" },
+                     pageName: "blogPage"
                 }
             ]);
     }

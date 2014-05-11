@@ -41,6 +41,10 @@ function defineMainView() {
         music: function() {
             this.model.set("currentPage", 2);
         },
+        
+        thoughts: function() {
+            this.model.set("currentPage", 3);  
+        },
 
         render: function() {
 
@@ -49,6 +53,7 @@ function defineMainView() {
         },
 
         goTo: function(model, pageNo) {
+            
             var previous = model.previous("currentPage");
             if (pageNo == 0) {
                 pauseClouds = false;
@@ -58,11 +63,10 @@ function defineMainView() {
                 pauseClouds = true;
                 pauseLines = false;
                 pauseSunset = true;
-            } else if (pageNo == 2) {
+            } else {
                 pauseClouds = true;
                 pauseLines = true;
                 pauseSunset = false;
-
             }
             if (previous != pageNo) {
 
@@ -110,25 +114,3 @@ function defineMainView() {
         }
     }); 
 }
-
-GRANT.Router = Backbone.Router.extend({
-
-	routes: {
-		"dev": "dev",
-		"music": "music",
-		"": "home"
-	},
-
-	home: function() {
-		GRANT.mainView.home();
-	},
-
-	dev: function() {
-		GRANT.mainView.dev();
-	},
-
-	music: function() {
-		GRANT.mainView.music();
-	}
-
-});

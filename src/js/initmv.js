@@ -2,6 +2,37 @@ function initMV() {
     defineMainView();
     GRANT.mainModel = new MainModel();
     GRANT.mainView = new MainView({ model: GRANT.mainModel });
+    GRANT.blogModel = new BlogModel();
+    GRANT.blogView = new BlogView({ model: GRANT.blogModel, el: document.getElementById("blogPage") });
+    GRANT.blogModel.load();
+    
+    GRANT.Router = Backbone.Router.extend({
+
+        routes: {
+            "dev": "dev",
+            "music": "music",
+            "thoughts": "thoughts",
+            "": "home"
+        },
+
+        home: function() {
+            GRANT.mainView.home();
+        },
+
+        dev: function() {
+            GRANT.mainView.dev();
+        },
+
+        music: function() {
+            GRANT.mainView.music();
+        },
+        
+        thoughts: function() {
+            GRANT.mainView.thoughts();   
+        }
+
+    });
+    
     GRANT.router = new GRANT.Router();
     Backbone.history.start();
 
