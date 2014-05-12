@@ -2,10 +2,7 @@ function initMV() {
     defineMainView();
     GRANT.mainModel = new MainModel();
     GRANT.mainView = new MainView({ model: GRANT.mainModel });
-    GRANT.blogModel = new BlogModel();
-    GRANT.blogView = new BlogView({ model: GRANT.blogModel, el: document.getElementById("blogPage") });
-    GRANT.blogModel.load();
-    
+
     GRANT.Router = Backbone.Router.extend({
 
         routes: {

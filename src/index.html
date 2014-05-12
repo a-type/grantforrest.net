@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="css/style-static.css"/>
         <link rel="stylesheet" href="css/portfolio-images.css"/>
         <link rel="stylesheet" href="css/modals.css"/>
+        <link rel="stylesheet" href="css/tumblr.css"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="lib/bootstrap-3.0.0-wip/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="lib/backbone/underscore.js"></script>
@@ -30,8 +31,6 @@
         <script type="text/javascript"> GRANT = {}; </script>
         <script type="text/javascript" src="mv/mainView.js"></script>
         <script type="text/javascript" src="mv/mainModel.js"></script>
-        <script type="text/javascript" src="mv/blogModel.js"></script>
-        <script type="text/javascript" src="mv/blogView.js"></script>
         <script type="text/javascript" src="lib/processing/processing.min.js"></script>
         <script type="text/javascript" src="processing/lines.pjs"></script>
         <script type="text/javascript" src="processing/sky.pjs"></script>
@@ -279,6 +278,7 @@
                         </div>
                     </div>
                     <div id="blogPage">
+                        <script src="http://grantforrestnet.tumblr.com/js"></script>
                     </div>
                 </div>
             </div>
@@ -317,17 +317,6 @@
                     <text> <%= content.info %> </text>
                 </div>
             <% }); %>
-        </script>
-        <script type="text/template" id="blogPostTemplate">
-            <div class="row blog-post">
-                <div class="blog-post-title jumbotron">
-                    <h1><%= title %></h1>
-                    <h3><%= date %></h3>
-                </div>
-                <div class="blog-post-body">
-                    <%= body %>
-                </div>
-            </div>
         </script>
         <script src="js/initHeader.js"></script>
         <script src="js/initArrow.js"></script>
