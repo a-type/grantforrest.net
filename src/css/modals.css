@@ -12,6 +12,7 @@
     position: absolute;
     background: white;
     height: auto;
+    width: 100%;
     top: 0;
     z-index: 6;
 }
