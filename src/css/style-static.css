@@ -119,10 +119,8 @@ h1,h2,h3,h4,h5,h6 {
     .btn-clear:focus,
     .btn-clear:active,
     .btn-force-select {
-        color: rgba(255, 255, 255, 0.75);
-        background-color: black;
+        color: black;
         border-color: transparent;
-        !important;
     }
 
     .fullscreen {
