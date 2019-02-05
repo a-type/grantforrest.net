@@ -31,7 +31,7 @@ interface Props {
   category: string;
 }
 
-export class Article extends React.PureComponent<Props> {
+export class Summary extends React.PureComponent<Props> {
   public render() {
     const { title, date, excerpt, slug, timeToRead, category } = this.props;
 

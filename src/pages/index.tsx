@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
-import { Layout, Article } from '../components';
+import { graphql } from 'gatsby';
+import { Layout, Summary, Link, WrapLink } from '../components';
 import PageProps from '../models/PageProps';
 import Helmet from 'react-helmet';
 import config from '../../config/site';
@@ -23,12 +23,12 @@ export default class IndexPage extends React.Component<PageProps> {
           <Box gridArea="intro" background="light-2" pad="medium">
             <h1>Name</h1>
             <p>Summary text</p>
-            <Link to="/contact">
+            <WrapLink to="/contact">
               <Button>Contact</Button>
-            </Link>
-            <Link to="/blog">
-              <Button>Blog</Button>
-            </Link>
+            </WrapLink>
+            <WrapLink to="/blog">
+              <Button primary>Blog</Button>
+            </WrapLink>
           </Box>
           <Box gridArea="content" pad="medium">
             <h2>About Me</h2>
@@ -36,7 +36,7 @@ export default class IndexPage extends React.Component<PageProps> {
             <hr />
             <h2>Latest Blog</h2>
             {edges.map(post => (
-              <Article
+              <Summary
                 title={post.node.frontmatter.title}
                 date={post.node.frontmatter.date}
                 excerpt={post.node.excerpt}
@@ -70,6 +70,7 @@ export const IndexQuery = graphql`
             category
           }
           timeToRead
+          excerpt
         }
       }
     }
