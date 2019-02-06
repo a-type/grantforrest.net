@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import PageProps from '../models/PageProps';
-import { Summary, Layout } from '../components';
+import { Summary, Layout, SingleColumn } from '../components';
 import { Heading } from 'grommet';
 import Helmet from 'react-helmet';
 import config from '../../config/site';
@@ -16,28 +16,30 @@ export default class TagTemplate extends React.PureComponent<PageProps> {
     return (
       <Layout>
         <Helmet title={`${'Tags'} | ${config.siteTitle}`} />
-        <header>
-          <Link to="/">{config.siteTitle}</Link>
-          <Heading level="2">Tag &ndash; {tagName}</Heading>
-          <i>
-            {subline} (See <Link to="/tags">all tags</Link>)
-          </i>
-        </header>
-        <div>
-          {posts
-            ? posts.map((post: any, index) => (
-                <Summary
-                  title={post.frontmatter.title}
-                  date={post.frontmatter.date}
-                  excerpt={post.excerpt}
-                  slug={kebabCase(post.frontmatter.title)}
-                  timeToRead={post.timeToRead}
-                  category={post.frontmatter.category}
-                  key={index}
-                />
-              ))
-            : null}
-        </div>
+        <SingleColumn>
+          <header>
+            <Link to="/">{config.siteTitle}</Link>
+            <Heading level="2">Tag &ndash; {tagName}</Heading>
+            <i>
+              {subline} (See <Link to="/tags">all tags</Link>)
+            </i>
+          </header>
+          <div>
+            {posts
+              ? posts.map((post: any, index) => (
+                  <Summary
+                    title={post.frontmatter.title}
+                    date={post.frontmatter.date}
+                    excerpt={post.excerpt}
+                    slug={kebabCase(post.frontmatter.title)}
+                    timeToRead={post.timeToRead}
+                    category={post.frontmatter.category}
+                    key={index}
+                  />
+                ))
+              : null}
+          </div>
+        </SingleColumn>
       </Layout>
     );
   }

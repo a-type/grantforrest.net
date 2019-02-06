@@ -1,26 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
+import { Link } from '../components';
 import kebabCase from 'lodash/kebabCase';
-
-const Post = styled.article`
-  display: flex;
-  flex-direction: column;
-  margin-top: 3.5rem;
-  margin-bottom: 3.5rem;
-`;
-
-const Title = styled.h2`
-  position: relative;
-  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  margin-bottom: 0.75rem;
-`;
-
-const Excerpt = styled.p`
-  grid-column: -1 / 1;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-`;
+import { Heading, Paragraph, Box } from 'grommet';
 
 interface Props {
   title: string;
@@ -36,16 +18,15 @@ export class Summary extends React.PureComponent<Props> {
     const { title, date, excerpt, slug, timeToRead, category } = this.props;
 
     return (
-      <Post>
-        <Title>
+      <Box margin={{ top: 'medium' }}>
+        <Heading level="3">
           <Link to={`/blog/${slug}`}>{title}</Link>
-        </Title>
+        </Heading>
         <i>
-          {date} &mdash; {timeToRead} Min Read &mdash; In
-          <Link to={`/categories/${kebabCase(category)}`}> {category}</Link>
+          {date} &mdash; {timeToRead} Min Read &mdash; In <Link to={`/categories/${kebabCase(category)}`}>{category}</Link>
         </i>
-        <Excerpt>{excerpt}</Excerpt>
-      </Post>
+        <Paragraph>{excerpt}</Paragraph>
+      </Box>
     );
   }
 }

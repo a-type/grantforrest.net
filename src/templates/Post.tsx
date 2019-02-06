@@ -1,18 +1,28 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Link, graphql } from 'gatsby';
-import styled from 'styled-components';
+import { graphql } from 'gatsby';
 import kebabCase from 'lodash/kebabCase';
-import { Layout, SEO, PrevNext } from '../components';
-import { Heading } from 'grommet';
+import { Layout, SEO, PrevNext, SingleColumn, Link } from '../components';
+import { Heading, Paragraph, Text } from 'grommet';
 import config from '../../config/site';
 import '../utils/prismjs-theme.css';
 import PathContext from '../models/PathContext';
 import Post from '../models/Post';
+import Rehype from 'rehype-react';
 
-const PostContent = styled.div`
-  margin-top: 4rem;
-`;
+const renderAst = new Rehype({
+  createElement: React.createElement,
+  components: {
+    a: Link,
+    h1: Heading,
+    h2: props => <Heading {...props} level="2" />,
+    h3: props => <Heading {...props} level="3" />,
+    h4: props => <Heading {...props} level="4" />,
+    h5: props => <Heading {...props} level="5" />,
+    p: Paragraph,
+    span: Text,
+  },
+}).Compiler;
 
 interface Props {
   data: {
@@ -27,8 +37,8 @@ export default class PostPage extends React.PureComponent<Props> {
     const post = this.props.data.markdownRemark;
     return (
       <Layout>
-        {post ? (
-          <>
+        {post && (
+          <SingleColumn>
             <SEO postPath={post.fields.slug} postNode={post} postSEO />
             <Helmet title={`${post.frontmatter.title} | ${config.siteTitle}`} />
             <header>
@@ -40,7 +50,7 @@ export default class PostPage extends React.PureComponent<Props> {
               </i>
             </header>
             <div>
-              <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
+              {renderAst(post.htmlAst)}
               {post.frontmatter.tags ? (
                 <i>
                   Tags: &#160;
@@ -53,8 +63,8 @@ export default class PostPage extends React.PureComponent<Props> {
               ) : null}
               <PrevNext prev={prev} next={next} />
             </div>
-          </>
-        ) : null}
+          </SingleColumn>
+        )}
       </Layout>
     );
   }
@@ -63,13 +73,13 @@ export default class PostPage extends React.PureComponent<Props> {
 export const postQuery = graphql`
   query($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
+      htmlAst
       fields {
         slug
       }
       frontmatter {
         title
-        date(formatString: "DD.MM.YYYY")
+        date(formatString: "YYYY.MM.DD")
         category
         tags
       }

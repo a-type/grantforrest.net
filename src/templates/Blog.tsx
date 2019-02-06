@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
-import { Layout, Summary, Pagination } from '../components';
+import { Layout, Summary, Pagination, SingleColumn } from '../components';
 import { Heading } from 'grommet';
 import Helmet from 'react-helmet';
 import config from '../../config/site';
@@ -23,25 +23,27 @@ export default class BlogPage extends React.Component<Props> {
 
     return (
       <Layout>
-        <Helmet title={`Blog | ${config.siteTitle}`} />
-        <header>
-          <Link to="/">{config.siteTitle}</Link>
-          <Heading level="2">Latest stories ({totalCount})</Heading>
-        </header>
-        <div>
-          {edges.map(post => (
-            <Summary
-              title={post.node.frontmatter.title}
-              date={post.node.frontmatter.date}
-              excerpt={post.node.excerpt}
-              timeToRead={post.node.timeToRead}
-              slug={post.node.fields.slug}
-              category={post.node.frontmatter.category}
-              key={post.node.fields.slug}
-            />
-          ))}
-          <Pagination currentPage={currentPage} totalPages={totalPages} url={'blog'} />
-        </div>
+        <SingleColumn>
+          <Helmet title={`Posts | ${config.siteTitle}`} />
+          <header>
+            <Link to="/">{config.siteTitle}</Link>
+            <Heading level="2">Latest stories ({totalCount})</Heading>
+          </header>
+          <div>
+            {edges.map(post => (
+              <Summary
+                title={post.node.frontmatter.title}
+                date={post.node.frontmatter.date}
+                excerpt={post.node.excerpt}
+                timeToRead={post.node.timeToRead}
+                slug={post.node.fields.slug}
+                category={post.node.frontmatter.category}
+                key={post.node.fields.slug}
+              />
+            ))}
+            <Pagination currentPage={currentPage} totalPages={totalPages} url={'blog'} />
+          </div>
+        </SingleColumn>
       </Layout>
     );
   }
@@ -57,7 +59,7 @@ export const BlogQuery = graphql`
           }
           frontmatter {
             title
-            date(formatString: "DD.MM.YYYY")
+            date(formatString: "YYYY.MM.DD")
             category
           }
           excerpt(pruneLength: 200)

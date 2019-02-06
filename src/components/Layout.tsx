@@ -6,20 +6,10 @@ import { Grommet } from 'grommet';
 import theme from '../../config/theme';
 
 const GlobalStyle = createGlobalStyle`
-  html, body {
-    margin: 0;
-  }
+  @import url('https://fonts.googleapis.com/css?family=Noto+Serif:200,400');
 
   html {
     overflow-y: hidden !important;
-  }
-
-  body {
-    min-height: 100vh;
-  }
-
-  * {
-    box-sizing: border-box;
   }
 `;
 
