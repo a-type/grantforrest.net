@@ -30,7 +30,7 @@ export const SEO = (props: SEO) => {
   }
   image = config.siteUrl + realPrefix + image;
   const blogURL = config.siteUrl + config.pathPrefix;
-  let schemaOrgJSONLD = [
+  let schemaOrgJSONLD: any[] = [
     {
       '@context': 'http://schema.org',
       '@type': 'WebSite',

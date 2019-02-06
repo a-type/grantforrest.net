@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from '../components';
 import kebabCase from 'lodash/kebabCase';
 import { Heading, Paragraph, Box } from 'grommet';
