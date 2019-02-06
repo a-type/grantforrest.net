@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'gatsby';
-import { Layout, Article } from '../components';
+import { Layout, Summary } from '../components';
 import { Heading } from 'grommet';
 import config from '../../config/site';
 import kebabCase from 'lodash/kebabCase';
@@ -26,7 +26,7 @@ export default class Category extends React.PureComponent<PageProps> {
         <div>
           {posts
             ? posts.map((post: any, index) => (
-                <Article
+                <Summary
                   title={post.frontmatter.title}
                   date={post.frontmatter.date}
                   excerpt={post.excerpt}

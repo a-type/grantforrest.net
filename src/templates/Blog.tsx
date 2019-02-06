@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
-import { Layout, Article, Pagination } from '../components';
+import { Layout, Summary, Pagination } from '../components';
 import { Heading } from 'grommet';
 import Helmet from 'react-helmet';
 import config from '../../config/site';
@@ -30,7 +30,7 @@ export default class BlogPage extends React.Component<Props> {
         </header>
         <div>
           {edges.map(post => (
-            <Article
+            <Summary
               title={post.node.frontmatter.title}
               date={post.node.frontmatter.date}
               excerpt={post.node.excerpt}

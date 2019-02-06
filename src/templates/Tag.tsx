@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import PageProps from '../models/PageProps';
-import { Article, Layout } from '../components';
+import { Summary, Layout } from '../components';
 import { Heading } from 'grommet';
 import Helmet from 'react-helmet';
 import config from '../../config/site';
@@ -26,7 +26,7 @@ export default class TagTemplate extends React.PureComponent<PageProps> {
         <div>
           {posts
             ? posts.map((post: any, index) => (
-                <Article
+                <Summary
                   title={post.frontmatter.title}
                   date={post.frontmatter.date}
                   excerpt={post.excerpt}

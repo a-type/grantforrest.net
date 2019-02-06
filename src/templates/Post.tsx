@@ -72,7 +72,6 @@ export const postQuery = graphql`
         date(formatString: "DD.MM.YYYY")
         category
         tags
-        banner
       }
       timeToRead
     }

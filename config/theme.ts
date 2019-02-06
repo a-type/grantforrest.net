@@ -9,4 +9,11 @@ export default {
       brand: '#a0f3b2',
     },
   },
+
+  button: {
+    padding: {
+      vertical: '10px',
+      horizontal: '1em',
+    },
+  },
 };
