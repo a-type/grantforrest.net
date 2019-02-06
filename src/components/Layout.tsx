@@ -6,8 +6,6 @@ import { Grommet } from 'grommet';
 import theme from '../../config/theme';
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Noto+Serif:200,400');
-
   html {
     overflow-y: hidden !important;
   }

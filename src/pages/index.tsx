@@ -6,6 +6,9 @@ import Helmet from 'react-helmet';
 import config from '../../config/site';
 import { Grid, Box, Heading, Paragraph, ResponsiveContext } from 'grommet';
 
+import 'typeface-noto-serif';
+import 'typeface-open-sans';
+
 export default class IndexPage extends React.Component<PageProps> {
   public render() {
     const { data } = this.props;

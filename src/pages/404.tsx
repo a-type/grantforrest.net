@@ -4,6 +4,9 @@ import Helmet from 'react-helmet';
 import config from '../../config/site';
 import { Link } from 'gatsby';
 
+import 'typeface-noto-serif';
+import 'typeface-open-sans';
+
 export default class NotFoundPage extends React.Component<any> {
   public render() {
     return (
