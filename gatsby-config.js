@@ -15,11 +15,9 @@ module.exports = {
     siteUrl: config.siteUrl + pathPrefix,
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-styled-components',
-    'gatsby-plugin-offline',
     'gatsby-plugin-typescript',
-    'gatsby-plugin-manifest',
+    'gatsby-plugin-styled-components',
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-lodash',
@@ -68,5 +66,6 @@ module.exports = {
         icon: config.favicon,
       },
     },
+    'gatsby-plugin-offline',
   ],
 };
