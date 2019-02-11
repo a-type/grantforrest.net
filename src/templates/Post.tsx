@@ -1,10 +1,8 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
 import kebabCase from 'lodash/kebabCase';
 import { Layout, SEO, PrevNext, SingleColumn, Link } from '../components';
 import { Heading, Paragraph, Text } from 'grommet';
-import config from '../../config/site';
 import '../utils/prismjs-theme.css';
 import PathContext from '../models/PathContext';
 import Post from '../models/Post';
@@ -36,13 +34,12 @@ export default class PostPage extends React.PureComponent<Props> {
     const { prev, next } = this.props.pathContext;
     const post = this.props.data.markdownRemark;
     return (
-      <Layout>
+      <Layout title={post.frontmatter.title}>
         {post && (
           <SingleColumn>
             <SEO postPath={post.fields.slug} postNode={post} postSEO />
-            <Helmet title={`${post.frontmatter.title} | ${config.siteTitle}`} />
             <header>
-              <Link to="/">{config.siteTitle}</Link>
+              <Link to="/">Home</Link>
               <Heading level="2">{post.frontmatter.title}</Heading>
               <i>
                 {post.frontmatter.date} &mdash; {post.timeToRead} Min Read &mdash; In{' '}

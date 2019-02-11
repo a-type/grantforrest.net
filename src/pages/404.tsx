@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Layout } from '../components';
-import Helmet from 'react-helmet';
-import config from '../../config/site';
 import { Link } from 'gatsby';
 
 import 'typeface-noto-serif';
@@ -10,10 +8,9 @@ import 'typeface-open-sans';
 export default class NotFoundPage extends React.Component<any> {
   public render() {
     return (
-      <Layout>
-        <Helmet title={`404 not found | ${config.siteTitle}`} />
+      <Layout title="Not found">
         <header>
-          <Link to="/">{config.siteTitle}</Link>
+          <Link to="/">Home</Link>
         </header>
         <div>
           <h1>NOT FOUND</h1>

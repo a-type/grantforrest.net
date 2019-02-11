@@ -1,7 +1,6 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 import Helmet from 'react-helmet';
-import config from '../../config/site';
 import Post from '../models/Post';
 
 interface SEO {
@@ -10,26 +9,26 @@ interface SEO {
   postSEO: boolean;
 }
 
+const siteUrl = 'https://grantforrest.net';
+
 export const SEO = (props: SEO) => {
   const { postNode, postPath, postSEO } = props;
   let title;
   let description;
-  let image;
   let postURL;
-  const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
+  const realPrefix ='';
   if (postSEO) {
     const postMeta = postNode.frontmatter;
     title = postMeta.title;
     description = postNode.excerpt;
-    image = config.siteBanner;
-    postURL = config.siteUrl + realPrefix + postPath;
+    // image = config.siteBanner;
+    postURL = siteUrl + realPrefix + postPath;
   } else {
-    title = config.siteTitle;
-    description = config.siteDescription;
-    image = config.siteBanner;
+    title = 'Grant Forrest';
+    description = 'Grant Forrest\'s blog and portfolio';
+    // image = config.siteBanner;
   }
-  image = config.siteUrl + realPrefix + image;
-  const blogURL = config.siteUrl + config.pathPrefix;
+  const blogURL = siteUrl;
   let schemaOrgJSONLD: any[] = [
     {
       '@context': 'http://schema.org',
@@ -37,7 +36,7 @@ export const SEO = (props: SEO) => {
       '@id': blogURL,
       url: blogURL,
       name: title,
-      alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
+      alternateName: '',
     },
   ];
   if (postSEO) {
@@ -50,26 +49,26 @@ export const SEO = (props: SEO) => {
         // @ts-ignore
         url: postURL,
         name: title,
-        alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
+        alternateName: '',
         headline: title,
-        image: {
-          '@type': 'ImageObject',
-          url: image,
-        },
-        description: config.siteDescription,
+        // image: {
+        //   '@type': 'ImageObject',
+        //   url: image,
+        // },
+        description,
         datePublished: postNode.frontmatter.date,
         dateModified: postNode.frontmatter.date,
         author: {
           '@type': 'Person',
-          name: config.author,
+          name: 'Grant Forrest',
         },
         publisher: {
           '@type': 'Organization',
-          name: config.author,
-          logo: {
-            '@type': 'ImageObject',
-            url: config.siteUrl + realPrefix + config.siteLogo,
-          },
+          name: 'Grant Forrest',
+          // logo: {
+          //   '@type': 'ImageObject',
+          //   url: siteUrl + realPrefix + config.siteLogo,
+          // },
         },
         isPartOf: blogURL,
         mainEntityOfPage: {
@@ -81,16 +80,16 @@ export const SEO = (props: SEO) => {
   }
   return (
     <Helmet>
-      <html lang={config.siteLanguage} />
-      <title>{config.siteTitle}</title>
-      <meta name="description" content={description} />
-      <meta name="image" content={image} />
+      <html lang="en" />
+      <title>Grant Forrest</title>
+      <meta name="description" content="Grant Forrest's blog and portfolio" />
+      {/* <meta name="image" content={image} /> */}
       <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
       <meta property="og:url" content={postSEO ? postURL : blogURL} />
       {postSEO ? <meta property="og:type" content="article" /> : null}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+      {/* <meta property="og:image" content={image} /> */}
     </Helmet>
   );
 };

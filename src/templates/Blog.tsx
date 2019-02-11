@@ -2,8 +2,6 @@ import React from 'react';
 import { Link, graphql } from 'gatsby';
 import { Layout, Summary, Pagination, SingleColumn } from '../components';
 import { Heading } from 'grommet';
-import Helmet from 'react-helmet';
-import config from '../../config/site';
 import Data from '../models/Data';
 
 interface Props {
@@ -22,11 +20,10 @@ export default class BlogPage extends React.Component<Props> {
     const { edges, totalCount } = data.allMarkdownRemark;
 
     return (
-      <Layout>
+      <Layout title="Posts">
         <SingleColumn>
-          <Helmet title={`Posts | ${config.siteTitle}`} />
           <header>
-            <Link to="/">{config.siteTitle}</Link>
+            <Link to="/">Home</Link>
             <Heading level="2">Latest stories ({totalCount})</Heading>
           </header>
           <div>

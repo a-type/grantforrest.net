@@ -6,13 +6,9 @@ require('ts-node').register({
   },
 });
 
-const config = require('./config/site').default;
-const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
-
 module.exports = {
-  pathPrefix: config.pathPrefix,
   siteMetadata: {
-    siteUrl: config.siteUrl + pathPrefix,
+    siteUrl: 'https://grantforrest.net',
   },
   plugins: [
     'gatsby-plugin-typescript',
@@ -27,15 +23,6 @@ module.exports = {
         path: `${__dirname}/blog`,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-google-tagmanager`,
-    //   options: {
-    //     id: config.Google_Tag_Manager_ID,
-    //     // Include GTM in development.
-    //     // Defaults to false meaning GTM will only be loaded in production.
-    //     includeInDevelopment: false,
-    //   },
-    // },
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -55,13 +42,12 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: config.siteTitle,
-        short_name: config.siteTitleAlt,
-        description: config.siteDescription,
-        background_color: config.backgroundColor,
-        theme_color: config.themeColor,
+        name: 'Grant Forrest',
+        short_name: 'Grant Forrest',
         display: 'standalone',
-        icon: config.favicon,
+        background_color: '#fff',
+        theme_color: '#323262',
+        icon: 'src/favicon.png',
       },
     },
     //'gatsby-plugin-offline',

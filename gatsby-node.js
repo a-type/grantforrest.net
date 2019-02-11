@@ -1,6 +1,5 @@
 const path = require('path');
 const _ = require('lodash');
-const config = require('./config/site').default;
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
@@ -121,7 +120,7 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors);
     }
     const posts = result.data.allMarkdownRemark.edges;
-    const postsPerPage = config.POST_PER_PAGE;
+    const postsPerPage = 10;
     const numPages = Math.ceil(posts.length / postsPerPage);
 
     Array.from({ length: numPages }).forEach((_, i) => {

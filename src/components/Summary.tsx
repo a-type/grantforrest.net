@@ -18,9 +18,9 @@ export class Summary extends React.PureComponent<Props> {
 
     return (
       <Box margin={{ top: 'medium' }}>
-        <Heading level="3">
-          <Link to={`/blog/${slug}`}>{title}</Link>
-        </Heading>
+        <Link to={`/blog/${slug}`}>
+          <Heading level="3">{title} </Heading>
+        </Link>
         <i>
           {date} &mdash; {timeToRead} Min Read &mdash; In <Link to={`/categories/${kebabCase(category)}`}>{category}</Link>
         </i>

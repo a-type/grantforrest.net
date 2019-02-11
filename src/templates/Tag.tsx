@@ -3,8 +3,6 @@ import Link from 'gatsby-link';
 import PageProps from '../models/PageProps';
 import { Summary, Layout, SingleColumn } from '../components';
 import { Heading } from 'grommet';
-import Helmet from 'react-helmet';
-import config from '../../config/site';
 import kebabCase from 'lodash/kebabCase';
 
 export default class TagTemplate extends React.PureComponent<PageProps> {
@@ -14,11 +12,10 @@ export default class TagTemplate extends React.PureComponent<PageProps> {
     const subline = `${totalCount} post${totalCount === 1 ? '' : 's'} tagged with "${tagName}"`;
 
     return (
-      <Layout>
-        <Helmet title={`${'Tags'} | ${config.siteTitle}`} />
+      <Layout title={`Tag: ${tagName}`}>
         <SingleColumn>
           <header>
-            <Link to="/">{config.siteTitle}</Link>
+            <Link to="/">Home</Link>
             <Heading level="2">Tag &ndash; {tagName}</Heading>
             <i>
               {subline} (See <Link to="/tags">all tags</Link>)

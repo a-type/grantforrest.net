@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle } from 'styled-components';
 import split from 'lodash/split';
 import { Grommet } from 'grommet';
-import theme from '../../config/theme';
+import theme from '../theme';
+import Helmet from 'react-helmet';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -19,29 +20,26 @@ const Footer = styled.footer`
   }
 `;
 
-export class Layout extends React.PureComponent<{}> {
-  public render() {
-    const { children } = this.props;
-
-    return (
-      <StaticQuery
-        query={graphql`
-          query LayoutQuery {
-            site {
-              buildTime(formatString: "DD.MM.YYYY")
-            }
+export const Layout: SFC<{ title: string }> = ({ children, title }) => {
+  return (
+    <StaticQuery
+      query={graphql`
+        query LayoutQuery {
+          site {
+            buildTime(formatString: "DD.MM.YYYY")
           }
-        `}
-        render={data => (
-          <Grommet theme={theme} full>
-            <GlobalStyle />
-            {children}
-            <Footer>
-              &copy; {split(data.site.buildTime, '.')[2]} Grant Forrest. All rights reserved. <br />
-            </Footer>
-          </Grommet>
-        )}
-      />
-    );
-  }
-}
+        }
+      `}
+      render={data => (
+        <Grommet theme={theme} full>
+          <GlobalStyle />
+          <Helmet title={`${title} | Grant Forrest`} />
+          {children}
+          <Footer>
+            &copy; {split(data.site.buildTime, '.')[2]} Grant Forrest. All rights reserved. <br />
+          </Footer>
+        </Grommet>
+      )}
+    />
+  );
+};

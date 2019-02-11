@@ -1,9 +1,7 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { Link } from 'gatsby';
 import { Layout, Summary, SingleColumn } from '../components';
 import { Heading } from 'grommet';
-import config from '../../config/site';
 import kebabCase from 'lodash/kebabCase';
 import PageProps from '../models/PageProps';
 
@@ -14,11 +12,10 @@ export default class Category extends React.PureComponent<PageProps> {
     const subline = `${totalCount} post${totalCount === 1 ? '' : 's'} tagged with "${categoryName}"`;
 
     return (
-      <Layout>
-        <Helmet title={`${categoryName} | ${config.siteTitle}`} />
+      <Layout title={categoryName}>
         <SingleColumn>
           <header>
-            <Link to="/">{config.siteTitle}</Link>
+            <Link to="/">Home</Link>
             <Heading level="2">Category &ndash; {categoryName}</Heading>
             <i>
               {subline} (See <Link to="/categories">all categories</Link>)
